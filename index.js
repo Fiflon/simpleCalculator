@@ -10,6 +10,7 @@ const del = document.querySelector("#del");
 const clear = document.querySelector("#clear");
 const equal = document.querySelector("#equal");
 const calculator = document.querySelector(".calculator");
+const plusminus = document.querySelector("#plusminus");
 
 del.addEventListener("click", () => {
   let currentLine = currentScreen.textContent.toString();
@@ -98,4 +99,23 @@ operators.forEach((operator) => {
     wasTheDotUsed = false;
     currentScreen.textContent = updatedLine;
   });
+});
+
+plusminus.addEventListener("click", () => {
+  let currentLineSplit = currentScreen.textContent.toString().split(" ");
+  let otherElements = currentLineSplit.slice(0, -2);
+  let lastElement = currentLineSplit.slice(-1);
+
+  console.log(otherElements);
+  console.log(lastElement);
+  lastElement[0] === "-"
+    ? (lastElement = `+${lastElement}`)
+    : (lastElement = `-${lastElement}`);
+
+  let lineAfterModification = "";
+  otherElements.forEach((elem) => {
+    lineAfterModification = `${lineAfterModification}${elem} `;
+  });
+  lineAfterModification = `${lineAfterModification}${lastElement}`;
+  currentScreen.textContent = lineAfterModification;
 });
